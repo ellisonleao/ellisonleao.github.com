@@ -6,11 +6,6 @@ function p() {
     printf "\033[0;32m${1}\033[0m\n"
 }
 
-if [[ -d "./public" ]]; then
-    p "Removing old public folder content"
-    rm -r ./public/*
-fi
-
 p "Regen public"
 
 hugo -t terminal 
