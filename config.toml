@@ -1,4 +1,4 @@
-baseurl = "https://ellisonleao.gihub.io/"
+baseurl = "https://ellisonleao.github.io/"
 languageCode = "pt-br"
 theme = "terminal"
 paginate = 5

@@ -1,11 +1,10 @@
-#!/bin/sh
-
+#!/bin/bash
 set -e
 
 printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 
 hugo -t terminal 
-cd public
+cd docs
 git add .
 msg="rebuilding site $(date)"
 if [ -n "$*" ]; then
