@@ -32,3 +32,5 @@ Gameplay:
 
 
 Este texto foi repostado em homenagem ao nosso querido amigo [Pedro Bueno](https://www.instagram.com/ph_bueno/), que infelizmente nos deixou em 2020. Sentiremos sua falta, irmão.
+
+{{< instagram B8_tbuFJUkH >}}
