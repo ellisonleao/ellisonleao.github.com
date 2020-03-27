@@ -9,6 +9,6 @@ Também sou baterista e tenho uma paixão por música e o que ela traz. [Tive um
 
 Se você quer trocar alguma idéia sobre tecnologia, música ou qualquer outra coisa, você pode me achar nos links:
 
-- [Twitter](https:/twitter.com/ellisonleao)
-- [Instagram](https:/instagram.com/ellisonleao)
+- [Twitter](https://twitter.com/ellisonleao)
+- [Instagram](https://instagram.com/ellisonleao)
 - [Email](mailto:ellisonleao@gmail.com)
