@@ -1,20 +1,24 @@
 #!/bin/bash
 set -e
 
-
 function p() {
-    printf "\033[0;32m${1}\033[0m\n"
+    printf "\033[0;32m%s\033[0m\n" "$1"
 }
 
-p "Regen public"
 
-hugo -t terminal 
-cd public
-git add .
-msg="rebuilding site $(date)"
-if [ -n "$*" ]; then
-	msg="$*"
-fi
-p "Deploying updates to GitHub"
-git commit -m "$msg"
-git push origin master
+function deploy() {
+    p "Regen public"
+
+    hugo -t hugo-vitae
+    cd public
+    git add .
+    msg="rebuilding site $(date)"
+    if [ -n "$*" ]; then
+        msg="$*"
+    fi
+    p "Deploying updates to GitHub"
+    git commit -m "$msg"
+    git push origin master
+}
+
+deploy "$@"
