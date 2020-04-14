@@ -1,33 +1,33 @@
 baseurl = "https://ellisonleao.github.io/"
 languageCode = "pt-br"
-theme = "terminal"
+theme = "hugo-vitae"
 paginate = 5
 defaultContentLanguage = "pt-br"
 
 [params]
-  contentTypeName = "posts"
-  themeColor = "green"
-  showMenuItems = 2
-  fullWidthTheme = false
-  centerTheme = false
-  goatCounter = "ellisonleao"
+    contentTypeName = "posts"
+    goatCounter = "ellisonleao"
+    [[params.social]]
+        name = "Github"
+        icon = "fab fa-github"
+        url = "https://github.com/ellisonleao/"
 
 [languages]
-  [languages.pt-br]
-    title = "Ellison Leão"
-    subtitle = "Polyrhythm programming"
-    keywords = ""
-    copyright = ""
-    menuMore = "Show more"
-    readMore = "Read more"
-    readOtherPosts = "Read other posts"
+    [languages.pt-br]
+        title = "Ellison Leão"
+        subtitle = "Polyrhythm programming"
+        keywords = ""
+        copyright = ""
+        menuMore = "Show more"
+        readMore = "Read more"
+        readOtherPosts = "Read other posts"
 
-    [languages.pt-br.params.logo]
-      logoText = "Polyrhythm programming"
-      logoHomeLink = "/"
+        [languages.pt-br.params.logo]
+            logoText = "Polyrhythm programming"
+            logoHomeLink = "/"
 
-    [languages.pt-br.menu]
-      [[languages.pt-br.menu.main]]
-        identifier = "about"
-        name = "Sobre mim"
-        url = "/about"
+        [languages.pt-br.menu]
+            [[languages.pt-br.menu.main]]
+                identifier = "about"
+                name = "Sobre mim"
+                url = "/about"
