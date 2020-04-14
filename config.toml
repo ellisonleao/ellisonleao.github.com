@@ -3,31 +3,53 @@ languageCode = "pt-br"
 theme = "hugo-vitae"
 paginate = 5
 defaultContentLanguage = "pt-br"
+pygmentsstyle = "colorful"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+title = "Ellison Leão"
 
 [params]
     contentTypeName = "posts"
     goatCounter = "ellisonleao"
+    listAuthor = true
+    subtitle = "Polyrhythm programming"
+
     [[params.social]]
         name = "Github"
         icon = "fab fa-github"
         url = "https://github.com/ellisonleao/"
 
+    [[params.social]]
+        name = "Twitter"
+        icon = "fab fa-twitter"
+        url = "https://twitter.com/ellisonleao"
+
+    [[params.social]]
+        name = "Linkedin"
+        icon = "fab fa-linkedin"
+        url = "https://linkedin.com/in/ellisonleao"
+
+    [[params.social]]
+        name = "RSS"
+        icon = "fas fa-rss"
+        url = "/index.xml"
+
+
 [languages]
     [languages.pt-br]
-        title = "Ellison Leão"
-        subtitle = "Polyrhythm programming"
-        keywords = ""
-        copyright = ""
-        menuMore = "Show more"
-        readMore = "Read more"
-        readOtherPosts = "Read other posts"
-
-        [languages.pt-br.params.logo]
-            logoText = "Polyrhythm programming"
-            logoHomeLink = "/"
-
+        authorpretext = "Escrito por"
         [languages.pt-br.menu]
             [[languages.pt-br.menu.main]]
                 identifier = "about"
                 name = "Sobre mim"
                 url = "/about"
+                weight = 1
+            [[languages.pt-br.menu.main]]
+                identifier = "posts"
+                name = "Blog"
+                url = "/posts"
+                weight = 2
+         [[languages.pt-br.menu.main]]
+                identifier = "tags"
+                name = "Tags"
+                url = "/tags"

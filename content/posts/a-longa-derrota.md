@@ -2,13 +2,11 @@
 title = "Tolkien e a longa derrota"
 date = "2020-03-26"
 author = "Ellison Leão"
-authorTwitter = "ellisonleao" #do not include @
+description = "Ele mora no oeste desde os dias do amanhecer, e eu moro com ele anos incontáveis... e juntos, através das eras do mundo, lutamos pela longa derrota"
+authorTwitter = "ellisonleao"
 cover = "img/long-defeat.jpg"
 tags = ["reflexao", "tolkien"]
-keywords = ["reflexao", "tolkien"]
-readingTime = true
 +++
-
 
 **Traduzido do original [Tolkien and the long defeat](https://www.thegospelcoalition.org/article/tolkien-and-the-long-defeat/), por Andrew Barber**
 
