@@ -37,7 +37,6 @@ title = "Ellison Leão"
 
 [languages]
     [languages.pt-br]
-        authorpretext = "Escrito por"
         [languages.pt-br.menu]
             [[languages.pt-br.menu.main]]
                 identifier = "about"
