@@ -13,6 +13,7 @@ title = "Ellison Leão"
     goatCounter = "ellisonleao"
     listAuthor = true
     subtitle = "Polyrhythm programming"
+    arc = "8fssWjDK"
 
     [[params.social]]
         name = "Github"
