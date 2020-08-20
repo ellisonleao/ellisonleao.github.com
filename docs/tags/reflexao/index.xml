@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>reflexao on Ellison Leão</title>
+		<link>http://localhost:1313/tags/reflexao/</link>
+		<description>Recent content in reflexao on localhost:1313</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>pt-br</language>
+		<lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
+		
+		<atom:link href="http://localhost:1313/tags/reflexao/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Tolkien e a longa derrota</title>
+			<link>http://localhost:1313/posts/a-longa-derrota/</link>
+			<pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+			
+			<guid>http://localhost:1313/posts/a-longa-derrota/</guid>
+			<description>
+				
+				Ele mora no oeste desde os dias do amanhecer, e eu moro com ele anos incontáveis... e juntos, através das eras do mundo, lutamos pela longa derrota
+				
+			</description>
+		</item>
+		
+	</channel>
+</rss>
