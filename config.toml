@@ -10,7 +10,7 @@ title = "Ellison Leão"
 publishDir = "docs"
 
 [params]
-    avatar = "/img/logo-site.png"
+    # avatar = "/img/logo-site.png"
     contentTypeName = "posts"
     goatCounter = "ellisonleao"
     listAuthor = true
