@@ -1,0 +1,52 @@
+==================================================================
+https://keybase.io/ellison
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://ellison.rocks
+  * I am ellison (https://keybase.io/ellison) on keybase.
+  * I have a public key ASD7xAyQBFAFqgzmamO5YjjGpX3_4rrILvipG3WRRseLCwo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01013ed5dfffc88c9a51c9403b055720921e8316bbd8aab400d3e974158ae2a9292f0a",
+            "host": "keybase.io",
+            "kid": "0120fbc40c90045005aa0ce66a63b96238c6a57dffe2bac82ef8a91b759146c78b0b0a",
+            "uid": "845132ac6642b399be7bf6ee83630900",
+            "username": "ellison"
+        },
+        "service": {
+            "hostname": "ellison.rocks",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.18"
+    },
+    "ctime": 1488940976,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1488940925,
+        "hash": "bb0e9c64e140e021f3c07016fe75ba5217fb6091d17a071f1311005cd9bdf652915961a37017fbdc284c29bcf9a3c3370882036a90d53aa96a743feca3be0d2f",
+        "seqno": 945368
+    },
+    "prev": "a923c9d77e7fa61f19c5f5f34796a3078e1e00ae53ea5b61b01a20317bee139a",
+    "seqno": 16,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg+8QMkARQBaoM5mpjuWI4xqV9/+K6yC74qRt1kUbHiwsKp3BheWxvYWTFAvR7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxM2VkNWRmZmZjODhjOWE1MWM5NDAzYjA1NTcyMDkyMWU4MzE2YmJkOGFhYjQwMGQzZTk3NDE1OGFlMmE5MjkyZjBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZmJjNDBjOTAwNDUwMDVhYTBjZTY2YTYzYjk2MjM4YzZhNTdkZmZlMmJhYzgyZWY4YTkxYjc1OTE0NmM3OGIwYjBhIiwidWlkIjoiODQ1MTMyYWM2NjQyYjM5OWJlN2JmNmVlODM2MzA5MDAiLCJ1c2VybmFtZSI6ImVsbGlzb24ifSwic2VydmljZSI6eyJob3N0bmFtZSI6ImVsbGlzb24ucm9ja3MiLCJwcm90b2NvbCI6Imh0dHA6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjE4In0sImN0aW1lIjoxNDg4OTQwOTc2LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE0ODg5NDA5MjUsImhhc2giOiJiYjBlOWM2NGUxNDBlMDIxZjNjMDcwMTZmZTc1YmE1MjE3ZmI2MDkxZDE3YTA3MWYxMzExMDA1Y2Q5YmRmNjUyOTE1OTYxYTM3MDE3ZmJkYzI4NGMyOWJjZjlhM2MzMzcwODgyMDM2YTkwZDUzYWE5NmE3NDNmZWNhM2JlMGQyZiIsInNlcW5vIjo5NDUzNjh9LCJwcmV2IjoiYTkyM2M5ZDc3ZTdmYTYxZjE5YzVmNWYzNDc5NmEzMDc4ZTFlMDBhZTUzZWE1YjYxYjAxYTIwMzE3YmVlMTM5YSIsInNlcW5vIjoxNiwidGFnIjoic2lnbmF0dXJlIn2jc2lnxEDF1YafGbmG6Tin4ME1pi/Po7gPDieo0PfC8G7Ky2lZmsljhNiIkRIpKGzzlGrYeu568pUWtvoy9yT57i6cxV8JqHNpZ190eXBlIKRoYXNogqR0eXBlCKV2YWx1ZcQgdkJCzdQTSNSf+t2tdBgWEC/FzKmnpZNJrmdFtOlNvFqjdGFnzQICp3ZlcnNpb24B
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/ellison
