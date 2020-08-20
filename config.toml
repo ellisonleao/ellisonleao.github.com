@@ -9,16 +9,23 @@ pygmentscodefencesguesssyntax = true
 title = "Ellison Leão"
 
 [params]
+    avatar = "/img/logo-site.png"
     contentTypeName = "posts"
     goatCounter = "ellisonleao"
     listAuthor = true
     subtitle = "Polyrhythm programming"
     arc = "8fssWjDK"
+    customCSS = "overrides.css"
 
     [[params.social]]
         name = "Github"
         icon = "fab fa-github"
         url = "https://github.com/ellisonleao/"
+
+    [[params.social]]
+        name = "Twitch"
+        icon = "fab fa-twitch"
+        url = "https://twitch.tv/npxbr"
 
     [[params.social]]
         name = "Twitter"
@@ -34,7 +41,6 @@ title = "Ellison Leão"
         name = "RSS"
         icon = "fas fa-rss"
         url = "/index.xml"
-
 
 [languages]
     [languages.pt-br]
