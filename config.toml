@@ -7,6 +7,7 @@ pygmentsstyle = "colorful"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 title = "Ellison Leão"
+publishDir = "docs"
 
 [params]
     avatar = "/img/logo-site.png"
