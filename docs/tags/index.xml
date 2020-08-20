@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Tags on Ellison Leão</title>
-		<link>http://localhost:1313/tags/</link>
-		<description>Recent content in Tags on localhost:1313</description>
+		<link>https://ellisonleao.github.io/tags/</link>
+		<description>Recent content in Tags on ellisonleao.github.io</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>pt-br</language>
 		<lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
 		
-		<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+		<atom:link href="https://ellisonleao.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>reflexao</title>
-			<link>http://localhost:1313/tags/reflexao/</link>
+			<link>https://ellisonleao.github.io/tags/reflexao/</link>
 			<pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
 			
-			<guid>http://localhost:1313/tags/reflexao/</guid>
+			<guid>https://ellisonleao.github.io/tags/reflexao/</guid>
 			<description>
 				
 				
@@ -24,10 +24,10 @@
 		</item>
 		<item>
 			<title>tolkien</title>
-			<link>http://localhost:1313/tags/tolkien/</link>
+			<link>https://ellisonleao.github.io/tags/tolkien/</link>
 			<pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
 			
-			<guid>http://localhost:1313/tags/tolkien/</guid>
+			<guid>https://ellisonleao.github.io/tags/tolkien/</guid>
 			<description>
 				
 				
@@ -36,10 +36,10 @@
 		</item>
 		<item>
 			<title>fuschia</title>
-			<link>http://localhost:1313/tags/fuschia/</link>
+			<link>https://ellisonleao.github.io/tags/fuschia/</link>
 			<pubDate>Thu, 16 Feb 2012 00:00:00 +0000</pubDate>
 			
-			<guid>http://localhost:1313/tags/fuschia/</guid>
+			<guid>https://ellisonleao.github.io/tags/fuschia/</guid>
 			<description>
 				
 				
@@ -48,10 +48,10 @@
 		</item>
 		<item>
 			<title>gamedev</title>
-			<link>http://localhost:1313/tags/gamedev/</link>
+			<link>https://ellisonleao.github.io/tags/gamedev/</link>
 			<pubDate>Thu, 16 Feb 2012 00:00:00 +0000</pubDate>
 			
-			<guid>http://localhost:1313/tags/gamedev/</guid>
+			<guid>https://ellisonleao.github.io/tags/gamedev/</guid>
 			<description>
 				
 				
