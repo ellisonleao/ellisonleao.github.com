@@ -2,22 +2,20 @@
 title = "Tolkien e a longa derrota"
 date = "2020-03-26"
 author = "Ellison Leão"
-description = "Ele mora no oeste desde os dias do amanhecer, e eu moro com ele anos incontáveis... e juntos, através das eras do mundo, lutamos pela longa derrota"
-authorTwitter = "ellisonleao"
-cover = "img/long-defeat.jpg"
+description = "..e juntos, através das eras do mundo, lutamos pela longa derrota"
 tags = ["reflexao", "tolkien"]
 +++
 
 **Traduzido do original [Tolkien and the long defeat](https://www.thegospelcoalition.org/article/tolkien-and-the-long-defeat/), por Andrew Barber**
 
-*Ele mora no oeste desde os dias do amanhecer, e eu moro com ele anos incontáveis... e juntos, através das eras do mundo, lutamos pela longa derrota.*
+_Ele mora no oeste desde os dias do amanhecer, e eu moro com ele anos incontáveis... e juntos, através das eras do mundo, lutamos pela longa derrota._
 
 > "A noite está silenciosa e a floresta escura; o tipo de escuridão encontrado apenas fora do mundo
-das lâmpadas e refeições da rua que se estendem até altas horas da noite. As árvores foram 
-despojadas e o espaço entre elas está completamente vazio; vazio tornado mais devastador pela 
-sugestão da glória passada."
+> das lâmpadas e refeições da rua que se estendem até altas horas da noite. As árvores foram
+> despojadas e o espaço entre elas está completamente vazio; vazio tornado mais devastador pela
+> sugestão da glória passada."
 
-Nesta cena entra uma figura real, uma autoridade e acostumada a louvar. Com apenas um olhar, 
+Nesta cena entra uma figura real, uma autoridade e acostumada a louvar. Com apenas um olhar,
 podemos ver sua conexão com este lugar. Pois ela também parece apenas um remanescente da majestade e da vida passadas. Esperamos para ver se ela se juntará a outra pessoa, pois certamente a realeza e a elegância desse tipo devem ser atendidas, mesmo em um estado tão reduzido.
 
 No entanto, logo fica claro: seu isolamento espiritual é espelhado por sua realidade física.
@@ -44,7 +42,7 @@ Em outras palavras, se combater a longa derrota não nos leva a arriscar nossa r
 
 Nossa rainha élfica solitária, Arwen, morre naquela floresta, sozinha. Como uma donzela élfica, ela tinha o direito a uma existência imortal. Mas sua mortalidade foi o sacrifício que ela deu por uma vida amorosa com o homem em quem ela se deleitava. Ela viveu uma vida bonita, criou uma família e reinou como rainha por muitos anos.
 
-Arwen enfrenta a longa derrota que todos nós, como seres humanos caídos, inevitavelmente enfrentaremos: nossa morte. Mas há uma verdade final que equilibra nossa aplicação dessa idéia, e ela vem do próprio Tolkien. **"Sou cristão e, de fato, católico romano"**, ele escreve em uma de suas cartas, **"de modo que não espero que a 'história' seja outra coisa senão uma 'longa derrota' - embora contenha algumas amostras ou vislumbres da vitória final."** 
+Arwen enfrenta a longa derrota que todos nós, como seres humanos caídos, inevitavelmente enfrentaremos: nossa morte. Mas há uma verdade final que equilibra nossa aplicação dessa idéia, e ela vem do próprio Tolkien. **"Sou cristão e, de fato, católico romano"**, ele escreve em uma de suas cartas, **"de modo que não espero que a 'história' seja outra coisa senão uma 'longa derrota' - embora contenha algumas amostras ou vislumbres da vitória final."**
 
 Apesar dos anos de trabalho fiel, J.R.R. e Edith Tolkien têm seus nomes em duas lápides, lado a lado. Mas não se pode deixar de imaginar que os momentos que compartilharam juntos na vida, o dia do casamento e o primeiro filho, a misericórdia para com os outros ou talvez simplesmente o conforto diário do chá foram vislumbres dessa vitória final. Que quando Jesus vier para inaugurar a próxima era e Nova Jerusalém descer à terra, nós os encontraremos lá, juntos, fiéis até o fim, experimentando o fruto da única esperança que sempre foi garantida: o reino de Deus na terra.
 

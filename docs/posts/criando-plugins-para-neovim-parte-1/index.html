@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  
+  <meta name="generator" content="Hugo 0.75.1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="author" content="Ellison Leão"><meta name="keywords" content="neovim,lua,plugin"><meta name="description" content="Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim"><meta property="og:title" content="Criando plugins Lua para Neovim - Parte 1" />
+<meta property="og:description" content="Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-1/" />
+<meta property="article:published_time" content="2020-10-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-10-02T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Criando plugins Lua para Neovim - Parte 1"/>
+<meta name="twitter:description" content="Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim"/>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/all.css" />
+  <script async src="https://arc.io/widget.js#8fssWjDK"></script>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/overrides.css" /><title>Criando plugins Lua para Neovim - Parte 1 | Ellison Leão</title></head>
+<body><header>
+	
+	<div id="titletext"><h2 id="title"><a href="https://ellisonleao.github.io/">Ellison Leão</a></h2></div>
+	<div id="title-description"><p id="subtitle">Polyrhythm programming</p><div id=social>
+			<nav>
+				<ul><li><a href="https://github.com/ellisonleao/"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitch.tv/npxbr"><i title="Twitch" class="icons fab fa-twitch"></i></a></li><li><a href="https://twitter.com/ellisonleao"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://linkedin.com/in/ellisonleao"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+			</nav>
+		</div>
+	</div>
+	
+	<div id="mainmenu">
+		<nav>
+			<ul>
+				
+				<li><a href="/about">Sobre mim</a></li>
+				
+				<li><a href="/posts">Blog</a></li>
+				
+				<li><a href="/tags">Tags</a></li>
+				
+			</ul>
+		</nav>
+	</div>
+	
+</header>
+<main><div class="post">
+  
+  <div class="author">
+    
+    
+    <p>
+      
+       Ellison Leão
+      
+    </p>
+    
+    
+  </div>
+  <div class="post-header">
+    
+    <div class="meta">
+      
+      <div class="date">
+        <span class="day">02</span>
+        <span class="rest">Out 2020</span>
+      </div>
+      
+    </div>
+    
+    <div class="matter">
+      <h1 class="title">Criando plugins Lua para Neovim - Parte 1</h1>
+    </div>
+  </div>
+  <div class="markdown">
+    <p>Desde que migrei para o Neovim em 2019, depois passar 8 anos usando vim com seus plugins fantásticos,
+comecei a descobrir as motivações que levaram os core devs a criar esse fork.</p>
+<p>Podemos ficar um bom tempo aqui falando sobre elas (e você pode ver uma palestra muito
+interessante sobre <a href="https://www.youtube.com/watch?v=Bt-vmPC_-Ho">clicando aqui</a>), mas o intuito desde texto é apenas
+destacar uma delas, e a que eu considero uma das mais importantes: <strong>Lua</strong></p>
+<p>Quando você instala o Neovim hoje, a linguagem Lua, ou mais especificamente o <strong>LuaJIT</strong>, uma versão
+otimizada da linguagem está inserida no core e você consegue usá-la diretamente num vimscript
+ou chamando um arquivo lua diretamente. Mas como isso acontece?</p>
+<p>Esse texto vai fazer parte de uma série onde vou mostrar como é possível criar seu primeiro plugin para o
+Neovim usando puramente Lua. Primeiro vamos voltar um pouco e mostrar a estrutura de um plugin convencional
+para o Vim:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">~/seu-plugin/
+|--plugin/
+|--ftplugin/
+|--after/
+|--autoload/
+</code></pre></div><p>Para nossa série, iremos focar na pasta <code>plugin</code> por enquanto.</p>
+<p>A pasta <code>plugin</code> é usada como ponto de entrada no carregamento do vim. Lá é o lugar onde
+irão viver os plugins globais. Guarde essa informação pois ela vai ser importante na
+criação do nosso plugin.</p>
+<h2 id="criando-nosso-hello-worldnvim-plugin">Criando nosso hello-world.nvim plugin</h2>
+<p>TL;DR : Código para o plugin da primeira parte <a href="https://github.com/npxbr/">aqui</a></p>
+<p>Como não utilizaremos de nenhum gerenciador de plugins nessa série, vamos facilitar um
+pouco o carregamento do mesmo e iremos criar os arquivos diretamente no <code>runtimepath</code> do
+neovim, mais precisamente em</p>
+<p><code>~/.local/share/nvim/site/plugin</code></p>
+<p>Caso essa pasta não exista em seu sistema, crie com</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ mkdir -p ~/.local/share/nvim/site/plugin
+</code></pre></div><p>Nosso plugin irá utilizar a versão nightly do neovim (<code>0.5.x</code>) que ainda está em fase beta
+e será lançada em breve. No decorrer dos próximos posts iremos mostrar como deixar o
+plugin compatível para versões <code>0.4.x</code> e também para o Vim.</p>
+<p>Dentro da pasta plugin crie a pasta <code>hello-world.nvim</code> e as subpastas <code>plugin</code> e <code>lua</code>.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ mkdir -p hello-world.nvim/<span style="color:#333">{</span>plugin,lua<span style="color:#333">}</span>
+</code></pre></div><p>Observe que agora temos uma nova pasta, <code>lua</code>. Ela tem uma função parecida com a <code>plugin</code>
+mas para arquivos <code>.lua</code> , ou seja, qualquer arquivo que seja colocado lá, fica
+disponível para ser importando a qualquer momento.</p>
+<p>Um módulo lua pode ser representado como:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#888">-- exemplo de um modulo lua</span>
+<span style="color:#080;font-weight:bold">local</span> M <span style="color:#333">=</span> {}
+
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#b06;font-weight:bold">M</span>.<span style="color:#06b;font-weight:bold">minha_funcao</span>()
+  print(<span style="background-color:#fff0f0">&#34;olá!&#34;</span>)
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">return</span> M
+</code></pre></div><p>No caso do nosso plugin, iremos criar um simples commando <code>:HelloWorld</code> , que printa
+<code>Hello World Lua</code> no prompt de comando do Neovim. Crie um arquivo chamado <code>hello-world.lua</code>
+dentro da pasta <code>lua</code> e adicione as seguintes linhas:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#888">-- modulo hello-world</span>
+<span style="color:#080;font-weight:bold">local</span> M <span style="color:#333">=</span> {}
+
+<span style="color:#888">-- hello_world printa a string &#34;Hello World!&#34; na tela</span>
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#b06;font-weight:bold">M</span>.<span style="color:#06b;font-weight:bold">hello_world</span>()
+  print(<span style="background-color:#fff0f0">&#34;Hello World Lua!&#34;</span>)
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#b06;font-weight:bold">M</span>.<span style="color:#06b;font-weight:bold">create_command</span>()
+  vim.cmd(<span style="background-color:#fff0f0">&#34;command! -bang -nargs=* HelloWorld lua require(&#39;hello-world&#39;).hello_world()&#34;</span>)
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#b06;font-weight:bold">M</span>.<span style="color:#06b;font-weight:bold">init</span>()
+  M.create_command()
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">return</span> M
+</code></pre></div><p>Podemos ver já o uso do <code>vim.cmd</code>, uma ponte entre lua e a chamada da função ou de um
+comando vimscript. Iremos explicar mais exemplos dele e outras APIs, como o <code>vim.api</code>, a
+mais importante delas.</p>
+<p>Agora vamos para a pasta <code>plugin</code>. Infelizmente no estado atual do Neovim (Outubro 2020)
+ainda não temos uma maneira totalmente nativa para carregar os plugins globais usando
+somente arquivos <code>.lua</code> de uma maneira trivial. Então iremos criar um simples arquivo
+<code>hello_world.vim</code> dentro da pasta <code>plugin</code> para chamar nosso módulo hello-world</p>
+<p>Dentro do arquivo <code>hello_world.vim</code>, digite:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml">lua require(<span style="background-color:#fff0f0">&#34;hello-world&#34;</span>).init()<span style="color:#f00;background-color:#faa">
+</span></code></pre></div><p>a diretriz <code>lua</code> dentro do vimscript roda uma chamada de código Lua, que no nosso caso é
+a inicialização do módulo hello-world ao iniciar o vim.</p>
+<p>Se tudo deu certo você já poderá rodar o commando no seu prompt de comando do vim
+digitando:</p>
+<p><code>:HelloWorld</code></p>
+<h2 id="conclusão">Conclusão</h2>
+<p>Esta é só a ponta do iceberg do que podemos fazer com Lua no neovim hoje. Nos próximos
+posts da série iremos abordar como criar floating windows, configurar seu Neovim para
+usar o LSP nativo (e fugir daquele plugin javascript que você deseja tanto) e no fim da
+série vou explicar como migrar seu vimfiles totalmente para lua usando o máximo de
+plugins puramente feitos em lua no dia-a-dia (sim, isso já é possível!)</p>
+<p>Aguardem os próximos posts e não esqueçam de seguir nossas redes e live streams</p>
+<h2 id="links-úteis">Links Úteis</h2>
+<ul>
+<li><a href="https://twitch.tv/npxbr">Twitch</a></li>
+<li><a href="https://twitter.com/npxbr">Twitter NpX</a></li>
+<li><a href="https://github.com/npxbr">Github</a></li>
+<li><a href="https://neovim.io/doc/user/lua.html">Documentação Oficial Neovim e Lua</a></li>
+</ul>
+<h3 id="para-ouvir">Para ouvir</h3>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/-xKgOYIGXo4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+  </div>
+  
+  
+  
+  
+  
+    
+  
+  
+  
+  <div class="tags">
+    <div class="taxosfloating_left">
+      <p>Tags</p>
+    </div>
+    <div class="termsfloating_right">
+      <p>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/lua/"> lua </a>
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/neovim/"> neovim </a>
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/plugin/"> plugin </a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </p>
+    </div>
+    <div class="clearit"></div>
+    
+    
+    
+    
+    
+  </div></div>
+
+  </main><div class="footer wrapper">
+	<nav class="nav">
+		<div class="footertext"></div>
+	</nav>
+</div>
+
+<script data-goatcounter="https://ellisonleao.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

@@ -6,10 +6,22 @@
 		<description>Recent content on ellisonleao.github.io</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>pt-br</language>
-		<lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Fri, 02 Oct 2020 00:00:00 +0000</lastBuildDate>
 		
 		<atom:link href="https://ellisonleao.github.io/index.xml" rel="self" type="application/rss+xml" />
 		
+		<item>
+			<title>Criando plugins Lua para Neovim - Parte 1</title>
+			<link>https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-1/</link>
+			<pubDate>Fri, 02 Oct 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-1/</guid>
+			<description>
+				
+				Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim
+				
+			</description>
+		</item>
 		<item>
 			<title>Tolkien e a longa derrota</title>
 			<link>https://ellisonleao.github.io/posts/a-longa-derrota/</link>
@@ -18,7 +30,7 @@
 			<guid>https://ellisonleao.github.io/posts/a-longa-derrota/</guid>
 			<description>
 				
-				Ele mora no oeste desde os dias do amanhecer, e eu moro com ele anos incontáveis... e juntos, através das eras do mundo, lutamos pela longa derrota
+				..e juntos, através das eras do mundo, lutamos pela longa derrota
 				
 			</description>
 		</item>
