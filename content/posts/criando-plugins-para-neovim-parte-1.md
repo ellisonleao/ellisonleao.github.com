@@ -38,7 +38,7 @@ criação do nosso plugin.
 
 ## Criando nosso hello-world.nvim plugin
 
-TL;DR : Código para o plugin da primeira parte [aqui](https://github.com/npxbr/)
+TL;DR : Código para o plugin da primeira parte [aqui](https://github.com/npxbr/criando-plugins-lua-neovim)
 
 Como não utilizaremos de nenhum gerenciador de plugins nessa série, vamos facilitar um
 pouco o carregamento do mesmo e iremos criar os arquivos diretamente no `runtimepath` do
