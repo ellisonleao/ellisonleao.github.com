@@ -10,6 +10,7 @@ title = "Ellison Leão"
 publishDir = "docs"
 
 [params]
+    googleSiteVerification = "RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4"
     # avatar = "/img/logo-site.png"
     contentTypeName = "posts"
     goatCounter = "ellisonleao"
