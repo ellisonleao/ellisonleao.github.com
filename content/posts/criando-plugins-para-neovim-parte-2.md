@@ -3,7 +3,7 @@ title = "Criando plugins Lua para Neovim - Parte 2"
 date = "2020-11-29"
 tags = ["neovim", "lua", "plugin"]
 keywords = ["plugin", "neovim", "lua"]
-description = "Um plugin para mostrar o tempo"
+description = "Um plugin para o mundo real"
 +++
 
 **Caso ainda não tenha lido a primeira parte dessa série, [clique aqui](/posts/criando-plugins-para-neovim-parte-1/)**
