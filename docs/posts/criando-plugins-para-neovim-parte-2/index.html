@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  
+  <meta name="generator" content="Hugo 0.77.0-DEV" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4" /><meta name="keywords" content="neovim,lua,plugin"><meta name="description" content="Um plugin para mostrar o tempo"><meta property="og:title" content="Criando plugins Lua para Neovim - Parte 2" />
+<meta property="og:description" content="Um plugin para mostrar o tempo" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-2/" />
+<meta property="article:published_time" content="2020-11-29T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-11-29T00:00:00+00:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Criando plugins Lua para Neovim - Parte 2"/>
+<meta name="twitter:description" content="Um plugin para mostrar o tempo"/>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/all.css" />
+  <script async src="https://arc.io/widget.js#8fssWjDK"></script>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/overrides.css" /><title>Criando plugins Lua para Neovim - Parte 2 | Ellison Leão</title></head>
+<body><header>
+    
+    <div id="titletext"><h2 id="title"><a href="https://ellisonleao.github.io/">Ellison Leão</a></h2></div>
+    <div id="title-description"><p id="subtitle">Polyrhythm programming</p><div id=social>
+            <nav>
+                <ul><li><a href="https://github.com/ellisonleao/"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitch.tv/npxbr"><i title="Twitch" class="icons fab fa-twitch"></i></a></li><li><a href="https://twitter.com/ellisonleao"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://linkedin.com/in/ellisonleao"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li><li><a href="#"><i title="Toggle Dark/Light mode" id="dark-mode-toggle" class="icons fas fa-sun"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div id="mainmenu">
+        <nav>
+            <ul>
+                
+                <li><a href="/about">Sobre mim</a></li>
+                
+                <li><a href="/posts">Blog</a></li>
+                
+                <li><a href="/tags">Tags</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    
+</header>
+<main><div class="post">
+  
+  <div class="author">
+    
+    
+    
+  </div>
+  <div class="post-header">
+    
+    <div class="meta">
+      
+      <div class="date">
+        <span class="day">29</span>
+        <span class="rest">Nov 2020</span>
+      </div>
+      
+    </div>
+    
+    <div class="matter">
+      <h1 class="title">Criando plugins Lua para Neovim - Parte 2</h1>
+    </div>
+  </div>
+  <div class="markdown">
+    <p><strong>Caso ainda não tenha lido a primeira parte dessa série, <a href="/posts/criando-plugins-para-neovim-parte-1/">clique aqui</a></strong></p>
+<p>Na segunda parte da nossa série vamos criar um plugin que poderá ser usado no dia-a-dia, onde iremos introduzir algumas funcionalidades
+legais do Neovim, como as floating windows e algumas funções da API lua.</p>
+<p>Vamos começar relembrando a estrutura de um plugin. Nosso plugin vai possuir a seguinte estrutura</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">weather.nvim
+├── lua
+│  └── weather.lua
+└── plugin
+   └── weather.vim
+</code></pre></div><p>A idéia do plugin é mostrar a previsão do tempo atual em uma floating window, sendo chamado a partir de um comando.</p>
+<p>Desenhando, vamos ter algo como:</p>
+<p><img src="/img/weather.png" alt=""></p>
+<h2 id="estrutura-do-módulo">Estrutura do módulo</h2>
+<p>Nosso módulo <code>weather.lua</code> vai conter a seguinte estrutura:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#080;font-weight:bold">local</span> M <span style="color:#333">=</span> {}
+
+<span style="color:#080;font-weight:bold">local</span> <span style="color:#080;font-weight:bold">function</span> <span style="color:#06b;font-weight:bold">create_command</span>()
+<span style="color:#888">-- vamos criar o comando :Weather aqui</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#b06;font-weight:bold">M</span>.<span style="color:#06b;font-weight:bold">create_window</span>()
+<span style="color:#888">-- aqui vamos criar a janela, um mapping para fechá-la e mostrar o tempo</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">function</span> <span style="color:#b06;font-weight:bold">M</span>.<span style="color:#06b;font-weight:bold">close_window</span>()
+<span style="color:#888">-- uma funcao para fechar a janela atual, que sera usada em um mapping</span>
+<span style="color:#080;font-weight:bold">end</span>
+
+<span style="color:#080;font-weight:bold">return</span> M
+</code></pre></div><p>Analisando uma por uma, temos:</p>
+<p><strong><code>create_command()</code></strong></p>
+<p>A função <code>create_command()</code> vai criar nosso comando customizado (<code>command!</code>). Aqui introduzimos o <code>vim.cmd</code>,
+que pode ser utilizada para chamar comandos <code>Ex</code> nativos do vim, mais conhecidos como os comandos <code>:</code>.</p>
+<p>defininos nosso comando como:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">vim.cmd(<span style="background-color:#fff0f0">&#34;command! -bang -nargs=0 Weather lua require(&#39;weather&#39;).create_window()&#34;</span>)
+</code></pre></div><p>com isso, nosso commando, <code>:Weather</code>, vai chamar diretamente uma função do nosso módulo lua para esse plugin</p>
+<p><strong><code>create_window()</code></strong></p>
+<p>a função <code>create_window()</code> vai ser responsável por criar uma floating window no canto superior direito da tela e mostrar o conteúdo do tempo.
+Para criar uma floating window, precisamos seguir os seguintes passos:</p>
+<ol>
+<li>criar um buffer &ldquo;descartável&rdquo;, que será usado para o conteúdo da janela</li>
+<li>criar as configurações da janela (tamanho de linhas, colunas, posicao x e y na tela)</li>
+<li>chamar o comando que &ldquo;abre&rdquo; a janela</li>
+<li>criar um mapping para poder fechar a janela</li>
+<li>criar o conteúdo do buffer, no nosso caso, o tempo atual.</li>
+</ol>
+<p>Para o passo 1, temos:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">buf <span style="color:#333">=</span> vim.api.nvim_create_buf(<span style="color:#080;font-weight:bold">false</span>, <span style="color:#080;font-weight:bold">true</span>)
+</code></pre></div><p>Aqui temos outra novidade também, o <code>vim.api</code> , um conjunto de métodos para o neovim dentro do módulo lua <code>vim</code>.
+<code>nvim_create_buf</code> aceita 2 parâmetros, se o buffer vai ser listado ou não (no nosso caso não, por isso o <code>false</code>) e ele será
+descartável ou não (no nosso caso sim, por isso o <code>true</code>). Para saber mais sobre o método, chame <code>:help nvim_create_buf</code>
+O método retorna o <strong>id</strong> do novo buffer criado, e a informação desse <strong>id</strong> é importante porque ele será usado para mais coisas
+mais pra frente. Note aqui também que não estamos criando a váriavel <code>buf</code> dentro desse método, mas uma variável &ldquo;global&rdquo;
+que também será usada por outros métodos dentro desse módulo.</p>
+<p>Para o passo 2, temos:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">  <span style="color:#080;font-weight:bold">local</span> columns <span style="color:#333">=</span> vim.api.nvim_get_option(<span style="background-color:#fff0f0">&#34;columns&#34;</span>)
+  <span style="color:#080;font-weight:bold">local</span> lines <span style="color:#333">=</span> vim.api.nvim_get_option(<span style="background-color:#fff0f0">&#34;lines&#34;</span>)
+  <span style="color:#080;font-weight:bold">local</span> win_height <span style="color:#333">=</span> math.ceil(lines <span style="color:#333">*</span> <span style="color:#60e;font-weight:bold">0.6</span> <span style="color:#333">-</span> <span style="color:#00d;font-weight:bold">8</span>)
+  <span style="color:#080;font-weight:bold">local</span> win_width <span style="color:#333">=</span> math.ceil(columns <span style="color:#333">*</span> <span style="color:#60e;font-weight:bold">0.3</span> <span style="color:#333">-</span> <span style="color:#00d;font-weight:bold">6</span>)
+  <span style="color:#080;font-weight:bold">local</span> x_pos <span style="color:#333">=</span> <span style="color:#00d;font-weight:bold">1</span>
+  <span style="color:#080;font-weight:bold">local</span> y_pos <span style="color:#333">=</span> columns <span style="color:#333">-</span> win_width
+
+  <span style="color:#080;font-weight:bold">local</span> configs <span style="color:#333">=</span> {
+    relative <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;editor&#34;</span>,
+    style <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;minimal&#34;</span>,
+    width <span style="color:#333">=</span> win_width,
+    height <span style="color:#333">=</span> win_height,
+    row <span style="color:#333">=</span> x_pos,
+    col <span style="color:#333">=</span> y_pos,
+  }
+</code></pre></div><p>Primeiro pegamos as variáveis de total de linhas e colunas do buffer atual para
+fazer um cálculo proporcional do tamanho da nossa floating window.</p>
+<p><code>relative=&quot;editor&quot;</code> é a opção que vai dizer que iremos usar as coordenadas x e y globais, relativas ao editor, tendo tamanho
+inicial (0,0) até (linhas-1, colunas-1)</p>
+<p><code>style = &quot;minimal&quot;</code>, vai deixar nossa janela com configurações mínimas, removendo
+a maioria das opções de UI. Isso é essencial para janelas temporárias, onde não iremos
+precisar fazer nenhuma alteração.</p>
+<p><code>width</code> e <code>height</code> é o calculo proporcional do tamanho da janela, adicionando um padding para que ela não fique simplesmente
+&ldquo;grudada&rdquo; no canto superior direito da tela. Cada unidade de medida corresponde a um
+caracter</p>
+<p><code>row</code> e <code>col</code> vai setar a posição x e y da nossa janela</p>
+<p>Para o passo 3, temos:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">win <span style="color:#333">=</span> vim.api.nvim_open_win(buf, <span style="color:#080;font-weight:bold">true</span>, win_opts)
+</code></pre></div><p>Aqui chamamos a <code>vim.api.nvim_open_win</code>, o método que vai abrir nossa janela, usando o buffer que criamos, com a configuração
+que passamos. Nos parâmetros, podemos também ver o <code>true</code>, que vai setar a janela como a atual. Vamos precisar disso para
+chamar o comando que gera o conteúdo da mesma. Note também que nossa variável <code>win</code> também é &ldquo;global&rdquo;, pois vamos precisar
+da informação dela para criar os mappings que vão poder fechá-la.</p>
+<p>Para o passo 4, temos:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">vim.api.nvim_buf_set_keymap(buf, <span style="background-color:#fff0f0">&#34;n&#34;</span>, <span style="background-color:#fff0f0">&#34;q&#34;</span>, <span style="background-color:#fff0f0">&#34;:lua require(&#39;weather&#39;).close_window()&lt;cr&gt;&#34;</span>, {noremap <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">true</span>, silent <span style="color:#333">=</span> <span style="color:#080;font-weight:bold">true</span>})
+</code></pre></div><p>Usamos o método <code>nvim_buf_set_keymap</code> para criar um <code>nnoremap</code> local, que basicamente irá chamar outro método, do nosso módulo,
+para fechar a janela. Iremos explicar o método <code>close_window()</code> mais pra frente.</p>
+<p>Como parâmetros, podemos ver que primeiro passamos o buffer <strong>id</strong> que criamos no passo 1, depois o modo, no caso o modo Normal,
+depois o comando que esse mapping irá chamar. Aqui podemos ver uma das coisas legais do Neovim com a linguagem Lua já integrada no core,
+onde chamamos o método do nosso plugin usando diretamente o comando <code>:lua</code>. Finalmente temos uma table com possíveis opções para o mapping, como <code>noremap</code>, <code>silent</code>, etc. No nosso caso, só queremos que o comando não coloque nenhum output na tela e não utilize nenhum outro mapping com a letra <code>q</code>, caso haja algum.</p>
+<p>Finalmente para o passo 5, temos:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua"><span style="color:#080;font-weight:bold">local</span> command <span style="color:#333">=</span> <span style="background-color:#fff0f0">&#34;curl https://wttr.in/?0&#34;</span>
+vim.api.nvim_call_function(<span style="background-color:#fff0f0">&#34;termopen&#34;</span>, {command})
+</code></pre></div><p>Aqui nos beneficiamos do terminal embutido no neovim e chamar o comando <code>curl</code>, que irá nos trazer o conteúdo do tempo em um terminal embutido na nossa janela. Podemos ver também que nesse caso estamos usando o <code>vim.api.nvim_call_function</code>, que basicamente chama a função nativa do vim pelo código lua. No nosso caso, chamamos a função <code>termopen</code> e como parâmetros dela, o comando <code>curl</code></p>
+<p><strong><code>close_window()</code></strong></p>
+<p>A função close window no nosso caso só vai ser uma chamada direta para o <code>nvim_win_close</code>:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-lua" data-lang="lua">vim.api.nvim_win_close(win, <span style="color:#080;font-weight:bold">true</span>)
+</code></pre></div><p>Aqui passamos a variável <code>win</code>, que é o <strong>id</strong> da nossa janela criada e <code>true</code> fala que queremos forçar o fechamendo da janela.</p>
+<h2 id="conclusão">Conclusão</h2>
+<p>Com isso, nosso primeiro plugin &ldquo;para o mundo real&rdquo;, está pronto. A versão do código para esse post pode ser vista <a href="https://github.com/npxbr/criando-plugins-lua-neovim/tree/master/parte-2">clicando aqui</a>.</p>
+<p>Para ver a versão completa do plugin, com mais customizações, <a href="https://github.com/npxbr/weather.nvim">clique aqui e já manda o star!</a>. Para a parte 3 da nossa série, vamos mostrar como portar nossa config do neovim em vimscript totalmente para Lua. Não deixem de acompanhar!</p>
+<h2 id="links-úteis">Links Úteis</h2>
+<ul>
+<li><a href="https://twitch.tv/npxbr">Twitch</a></li>
+<li><a href="https://twitter.com/npxbr">Twitter NpX</a></li>
+<li><a href="https://github.com/npxbr">Github</a></li>
+<li><a href="https://t.me/vimbr">VimBR no telegram</a></li>
+<li><a href="https://neovim.io/doc/user/lua.html">Documentação Oficial Neovim e Lua</a></li>
+</ul>
+<h2 id="para-ouvir">Para ouvir</h2>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/oKz-YAs6ZsA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+  </div>
+  
+  
+  
+  
+  
+    
+  
+  
+  
+  <div class="tags">
+    <div class="taxosfloating_left">
+      <p>Tags</p>
+    </div>
+    <div class="termsfloating_right">
+      <p>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/lua/"> lua </a>
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/neovim/"> neovim </a>
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/plugin/"> plugin </a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </p>
+    </div>
+    <div class="clearit"></div>
+    
+    
+    
+    
+    
+  </div></div>
+
+  </main><div class="footer wrapper">
+	<nav class="nav">
+		<div class="footertext"></div>
+	</nav>
+</div>
+
+<script data-goatcounter="https://ellisonleao.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

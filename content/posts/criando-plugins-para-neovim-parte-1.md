@@ -1,7 +1,6 @@
 +++
 title = "Criando plugins Lua para Neovim - Parte 1"
 date = "2020-10-02"
-author = "Ellison Leão"
 tags = ["neovim", "lua", "plugin"]
 keywords = ["plugin", "neovim", "lua"]
 description = "Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim"
@@ -138,6 +137,7 @@ Aguardem os próximos posts e não esqueçam de seguir nossas redes e live strea
 
 ## Links Úteis
 
+- [Parte 2](https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-2/)
 - [Twitch](https://twitch.tv/npxbr)
 - [Twitter NpX](https://twitter.com/npxbr)
 - [Github](https://github.com/npxbr)

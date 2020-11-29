@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br"><head>
   
-  <meta name="generator" content="Hugo 0.76.3" />
+  <meta name="generator" content="Hugo 0.77.0-DEV" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4" /><meta name="author" content="Ellison Leão"><meta name="keywords" content="neovim,lua,plugin"><meta name="description" content="Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim"><meta property="og:title" content="Criando plugins Lua para Neovim - Parte 1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4" /><meta name="keywords" content="neovim,lua,plugin"><meta name="description" content="Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim"><meta property="og:title" content="Criando plugins Lua para Neovim - Parte 1" />
 <meta property="og:description" content="Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-1/" />
@@ -21,40 +21,35 @@
 
   <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/overrides.css" /><title>Criando plugins Lua para Neovim - Parte 1 | Ellison Leão</title></head>
 <body><header>
-	
-	<div id="titletext"><h2 id="title"><a href="https://ellisonleao.github.io/">Ellison Leão</a></h2></div>
-	<div id="title-description"><p id="subtitle">Polyrhythm programming</p><div id=social>
-			<nav>
-				<ul><li><a href="https://github.com/ellisonleao/"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitch.tv/npxbr"><i title="Twitch" class="icons fab fa-twitch"></i></a></li><li><a href="https://twitter.com/ellisonleao"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://linkedin.com/in/ellisonleao"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
-			</nav>
-		</div>
-	</div>
-	
-	<div id="mainmenu">
-		<nav>
-			<ul>
-				
-				<li><a href="/about">Sobre mim</a></li>
-				
-				<li><a href="/posts">Blog</a></li>
-				
-				<li><a href="/tags">Tags</a></li>
-				
-			</ul>
-		</nav>
-	</div>
-	
+    
+    <div id="titletext"><h2 id="title"><a href="https://ellisonleao.github.io/">Ellison Leão</a></h2></div>
+    <div id="title-description"><p id="subtitle">Polyrhythm programming</p><div id=social>
+            <nav>
+                <ul><li><a href="https://github.com/ellisonleao/"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitch.tv/npxbr"><i title="Twitch" class="icons fab fa-twitch"></i></a></li><li><a href="https://twitter.com/ellisonleao"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://linkedin.com/in/ellisonleao"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li><li><a href="#"><i title="Toggle Dark/Light mode" id="dark-mode-toggle" class="icons fas fa-sun"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div id="mainmenu">
+        <nav>
+            <ul>
+                
+                <li><a href="/about">Sobre mim</a></li>
+                
+                <li><a href="/posts">Blog</a></li>
+                
+                <li><a href="/tags">Tags</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    
 </header>
 <main><div class="post">
   
   <div class="author">
     
-    
-    <p>
-      
-       Ellison Leão
-      
-    </p>
     
     
   </div>
@@ -162,6 +157,7 @@ plugins puramente feitos em lua no dia-a-dia (sim, isso já é possível!)</p>
 <p>Aguardem os próximos posts e não esqueçam de seguir nossas redes e live streams</p>
 <h2 id="links-úteis">Links Úteis</h2>
 <ul>
+<li><a href="https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-2/">Parte 2</a></li>
 <li><a href="https://twitch.tv/npxbr">Twitch</a></li>
 <li><a href="https://twitter.com/npxbr">Twitter NpX</a></li>
 <li><a href="https://github.com/npxbr">Github</a></li>
@@ -201,13 +197,19 @@ plugins puramente feitos em lua no dia-a-dia (sim, isso já é possível!)</p>
         
         
         
+        
+        
         <a href="https://ellisonleao.github.io/tags/lua/"> lua </a>
         
         
         
         
         
+        
+        
         <a href="https://ellisonleao.github.io/tags/neovim/"> neovim </a>
+        
+        
         
         
         
