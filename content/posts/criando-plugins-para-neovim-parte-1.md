@@ -139,7 +139,7 @@ Aguardem os próximos posts e não esqueçam de seguir nossas redes e live strea
 
 - [Parte 2](https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-2/)
 - [Twitch](https://twitch.tv/npxbr)
-- [Twitter NpX](https://twitter.com/npxbr)
+- [Twitter](https://twitter.com/ellisonleao)
 - [Github](https://github.com/npxbr)
 - [Documentação Oficial Neovim e Lua](https://neovim.io/doc/user/lua.html)
 

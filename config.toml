@@ -3,11 +3,12 @@ languageCode = "pt-br"
 theme = "hugo-vitae"
 paginate = 5
 defaultContentLanguage = "pt-br"
-pygmentsstyle = "colorful"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
 title = "Ellison Leão"
 publishDir = "docs"
+pygmentsUseClassic            = false
+pygmentsCodeFences            = true
+pygmentsCodeFencesGuessSyntax = true
+pygmentsUseClasses            = true
 
 [params]
     googleSiteVerification = "RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4"

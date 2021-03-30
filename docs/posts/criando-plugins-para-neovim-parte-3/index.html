@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  
+  <meta name="generator" content="Hugo 0.82.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4" /><meta name="keywords" content="neovim,lua,plugin,dotfiles"><meta name="description" content="Migrando do init.vim para o init.lua"><meta property="og:title" content="Criando plugins Lua para Neovim - Parte 3" />
+<meta property="og:description" content="Migrando do init.vim para o init.lua" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-3/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-30T00:00:00&#43;00:00" />
+<meta property="article:modified_time" content="2021-03-30T00:00:00&#43;00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Criando plugins Lua para Neovim - Parte 3"/>
+<meta name="twitter:description" content="Migrando do init.vim para o init.lua"/>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/all.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/syntax.css" />
+  <script async src="https://arc.io/widget.js#8fssWjDK"></script>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/overrides.css" /><title>Criando plugins Lua para Neovim - Parte 3 | Ellison Leão</title></head>
+<body><header>
+    
+    <div id="titletext"><h2 id="title"><a href="https://ellisonleao.github.io/">Ellison Leão</a></h2></div>
+    <div id="title-description"><p id="subtitle">Polyrhythm programming</p><div id=social>
+            <nav>
+                <ul><li><a href="https://github.com/ellisonleao/"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitch.tv/npxbr"><i title="Twitch" class="icons fab fa-twitch"></i></a></li><li><a href="https://twitter.com/ellisonleao"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://linkedin.com/in/ellisonleao"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div id="mainmenu">
+        <nav>
+            <ul>
+                
+                <li><a href="/about">Sobre mim</a></li>
+                
+                <li><a href="/posts">Blog</a></li>
+                
+                <li><a href="/tags">Tags</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    
+</header>
+<main><div class="post">
+  
+  <div class="author">
+    
+    
+    
+  </div>
+  <div class="post-header">
+    
+    <div class="meta">
+      
+      <div class="date">
+        <span class="day">30</span>
+        <span class="rest">Mar 2021</span>
+      </div>
+      
+    </div>
+    
+    <div class="matter">
+      <h1 class="title">Criando plugins Lua para Neovim - Parte 3</h1>
+      <h3 class="title">Migrando do init.vim para o init.lua</h3>
+    </div>
+  </div>
+  <div class="markdown">
+    <p><strong>Caso ainda não tenha lido a primeira e segunda parte dessa série, <a href="/posts/criando-plugins-para-neovim-parte-1/">clique aqui</a></strong>
+<strong>Todo código mostrado aqui só funcionará nas versões 0.5+ do Neovim</strong></p>
+<p>Para fechar nossa série de criação de plugins em Lua para o Neovim, vamos mudar um pouco
+o foco na criação de plugins para um tutorial de como podemos migrar toda nossa configuração do
+Neovim usando o tradicional Vimscript, para <strong>Lua</strong>.</p>
+<blockquote>
+<p>Mas por que Lua?</p>
+</blockquote>
+<p>A decisão tomada pelo <em>core team</em> de desenvolvimento do Neovim tem várias respostas diversas,
+que vão desde velocidade a facilidade de escrita, pelo fato de Lua ser uma linguagem bem
+extensível. Para entender as principais motivações, sugiro dar uma pausa no post e apreciem a talk
+<strong>&ldquo;We can have nice things&rdquo;</strong>, do <a href="https://github.com/justinmk">Justin M. Keyes</a>, um dos líderes de
+desenvolvimento do Neovim.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/Bt-vmPC_-Ho" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="a-migração">A migração</h2>
+<p>Caso você ainda não conheça a estrutura de diretórios do Neovim, toda configuração vai
+em:</p>
+<ul>
+<li>Unix: <strong>~/.config/nvim/init.vim</strong></li>
+<li>Windows: <strong>~/AppData/Local/nvim/init.vim</strong></li>
+</ul>
+<p>ou, caso você queria um path de config customizado, onde <code>$XDG_CONFIG_HOME</code> é definido,
+fica assim:</p>
+<ul>
+<li><strong>$XDG_CONFIG_HOME/nvim/init.vim</strong></li>
+</ul>
+<p>Esse arquivo é o ponto de entrada para as configurações customizadas do editor, desde
+cores, tamanhos de fonte, a instalação de plugins.</p>
+<p>No nosso caso, começaremos renomeando o arquivo <code>init.vim</code> para <code>init.old</code> e criando um
+novo arquivo chamado <code>init.lua</code>.</p>
+<blockquote>
+<p>Por quê precisamos renomear o init.vim?</p>
+</blockquote>
+<p>No neovim não é possível existir 2 pontos de entrada para as configurações, então você
+só poderá usar o <code>init.vim</code> ou o mais recente, <code>init.lua</code></p>
+<p>Para o nosso tutorial não ficar bastante extenso, iremos usar um <code>init.vim</code>
+relativamente pequeno, explicando as principais configurações e como portá-las para a
+versão em lua.</p>
+<p>Mas primeiro precisamos relembrar como a API em Lua se comporta:</p>
+<h2 id="o-namespace-_vim_">O namespace <em>vim</em></h2>
+<p>Na implementação da API Lua para o Neovim, existe uma variável chamada <code>vim</code>, que é o
+ponto de entrada para todas as funções da chamada &ldquo;biblioteca padrão&rdquo; Lua para o Neovim. Essas funções servem
+diferentes propósitos, mas o principal sendo a ponte entre o código lua e o editor.</p>
+<ul>
+<li>
+<p><strong>vim.inspect</strong>: uma função de debug para inspecionar resultados. Geralmente em lua,
+os resultados vem em tables, e esses são difíceis de ser expostos em formato de &ldquo;print&rdquo;.
+Essa função &ldquo;disseca&rdquo; a váriável que você gostaria de expor de uma forma mais
+amigável.</p>
+</li>
+<li>
+<p><strong>vim.regex</strong>: Módulo que possibilita o uso de regexes diretamente no código Lua. Para
+mais info <code>:h vim.regex</code></p>
+</li>
+<li>
+<p><strong>vim.api</strong>: Provavelmente o módulo mais importante dessa API. Aqui encontramos todas
+a funções para trabalhar com buffers, windows, chamar comandos do neovim, etc.</p>
+</li>
+<li>
+<p><strong>vim.loop</strong>: Módulo que funciona como uma camada de abstração da LibUV, a camada de <em>event-loop</em> do Neovim. Pra quem quer usar concorrência, timers, etc,
+esse módulo é o caminho.</p>
+</li>
+<li>
+<p><strong>vim.lsp</strong>: Pra quem trabalhar diretamente na fantástica implementação nativa de um cliente LSP dentro do Neovim.</p>
+</li>
+<li>
+<p><strong>vim.treesitter</strong>: O módulo que expõe algumas funções para se trabalhar diretamente
+com o <a href="https://tree-sitter.github.io/tree-sitter/">tree-sitter</a>.</p>
+</li>
+</ul>
+<p>Para este post, focaremos apenas na <strong>vim.api</strong></p>
+<h2 id="nosso-arquivo-initlua">Nosso arquivo init.lua</h2>
+<p>Levando em consideração que nosso <code>init.vim</code> tinha a seguinte cara:</p>
+<div class="highlight"><pre class="chroma"><code class="language-vimrc" data-lang="vimrc"><span class="c">&#34; Parte 1</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">colorcolumn</span><span class="p">=</span><span class="m">80</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">expandtab</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">tabstop</span><span class="p">=</span><span class="m">4</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">autoindent</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">incsearch</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">hlsearch</span><span class="err">
+</span><span class="err"></span><span class="nx">set</span> <span class="nx">termguicolors</span><span class="err">
+</span><span class="err"></span><span class="c">
+</span><span class="c">&#34; Parte 2</span><span class="err">
+</span><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">minha_config</span> <span class="p">=</span> <span class="s1">&#39;valor&#39;</span><span class="err">
+</span><span class="err"></span><span class="k">let</span> <span class="nx">g</span>:<span class="nx">algumnamespace</span>#<span class="nx">teste</span>#<span class="nx">variavel</span> <span class="p">=</span> <span class="s2">&#34;valor&#34;</span><span class="err">
+</span><span class="err"></span><span class="c">
+</span><span class="c">&#34; Parte 3</span><span class="err">
+</span><span class="err"></span><span class="nx">nmap</span> <span class="p">&lt;</span><span class="nx">leader</span><span class="p">&gt;,</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span>:<span class="nx">noh</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span><span class="err"></span><span class="nx">nnoremap</span> <span class="p">&lt;</span><span class="nx">leader</span><span class="p">&gt;</span><span class="nx">h</span> <span class="p">&lt;</span><span class="nx">Cmd</span><span class="p">&gt;</span><span class="nx">split</span><span class="p">&lt;</span><span class="nx">CR</span><span class="p">&gt;</span><span class="err">
+</span><span class="err"></span><span class="nx">vnoremap</span> <span class="p">&lt;</span> <span class="p">&lt;</span><span class="nx">gv</span><span class="err">
+</span><span class="err"></span><span class="c">
+</span><span class="c">&#34; Parte 4</span><span class="err">
+</span><span class="err"></span><span class="nx">autocmd</span> <span class="nx">BufEnter</span> * <span class="nx">echo</span> <span class="s2">&#34;hello nvim&#34;</span><span class="err">
+</span><span class="err"></span><span class="c">
+</span><span class="c">&#34; Parte 5</span><span class="err">
+</span><span class="err"></span><span class="k">function</span><span class="p">!</span> <span class="nx">SayHello</span><span class="p">()</span><span class="err">
+</span><span class="err"></span>  <span class="nx">echohl</span> <span class="nx">WarningMsg</span><span class="err">
+</span><span class="err"></span>  <span class="nx">echo</span> <span class="s2">&#34;Hello World&#34;</span><span class="err">
+</span><span class="err"></span>  <span class="nx">echohl</span><span class="err">
+</span><span class="err"></span><span class="k">endfunction</span><span class="err">
+</span></code></pre></div><p>separamos a migração em 4 partes:</p>
+<ul>
+<li><em>options</em></li>
+<li><em>vars</em></li>
+<li><em>mappings</em></li>
+<li><em>autocmds</em></li>
+<li><em>functions</em></li>
+</ul>
+<p>Para a <strong>parte 1</strong>, temos as seguintes funções da <strong>vim.api</strong>:</p>
+<ul>
+<li><strong>vim.api.nvim_set_option</strong></li>
+<li><strong>vim.api.nvim_buf_set_option</strong></li>
+<li><strong>vim.api.nvim_win_set_option</strong></li>
+</ul>
+<p>Para facilitar a escrita, temos os atalhos correspondentes:</p>
+<ul>
+<li><strong>vim.o</strong></li>
+<li><strong>vim.bo</strong></li>
+<li><strong>vim.wo</strong></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="n">vim.o</span><span class="p">.</span><span class="n">termguicolors</span> <span class="o">=</span> <span class="kc">true</span>   <span class="c1">-- set termguicolors</span>
+<span class="n">vim.wo</span><span class="p">.</span><span class="n">colorcolumn</span><span class="o">=</span><span class="mi">80</span>        <span class="c1">-- set colorcolumn=80</span>
+<span class="n">vim.o</span><span class="p">.</span><span class="n">expandtab</span>              <span class="c1">-- set expandtab</span>
+<span class="n">vim.o</span><span class="p">.</span><span class="n">tabstop</span><span class="o">=</span><span class="mi">4</span>              <span class="c1">-- set tabstop=4</span>
+<span class="n">vim.o</span><span class="p">.</span><span class="n">autoindent</span> <span class="o">=</span> <span class="kc">true</span>      <span class="c1">-- set autoindent</span>
+<span class="n">vim.o</span><span class="p">.</span><span class="n">incsearch</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set incsearch</span>
+<span class="n">vim.o</span><span class="p">.</span><span class="n">hlsearch</span> <span class="o">=</span> <span class="kc">true</span>        <span class="c1">-- set hlsearch</span>
+</code></pre></div><p>os <code>meta-acessors</code> (veja <code>:h lua-vim-options</code>) <code>vim.[o|wo|bo]</code> funcionam como getters e setters na atribuição dessas opções, ou seja, caso algum
+valor seja passado a essas variáveis, ela substituirá o valor anterior e caso deseje pegar o valor atual, é só atribuir
+o valor dela em outra variável.</p>
+<p>Como vocês podem perceber, não é tão fácil ainda saber quando usar <code>vim.o</code>, <code>vim.bo</code>, ou <code>vim.wo</code>, sem conhecer
+pra que serve cada opção e qual o escopo onde elas funcionam. Existe um <a href="https://github.com/neovim/neovim/pull/13479">PR</a>
+onde será introduzido o módulo <code>vim.opt</code>, tornando essas configurações tão fáceis quanto no vimscript. Caso deseje uma
+opção paliativa, você pode usar a seguinte função:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="n">opts_info</span> <span class="o">=</span> <span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_get_all_options_info</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">setmetatable</span><span class="p">({},</span> <span class="p">{</span>
+  <span class="n">__index</span> <span class="o">=</span> <span class="n">vim.o</span><span class="p">,</span>
+  <span class="n">__newindex</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="n">vim.o</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="kd">local</span> <span class="n">scope</span> <span class="o">=</span> <span class="n">opts_info</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="n">scope</span>
+    <span class="kr">if</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&#34;win&#34;</span> <span class="kr">then</span>
+      <span class="n">vim.wo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="kr">elseif</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&#34;buf&#34;</span> <span class="kr">then</span>
+      <span class="n">vim.bo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="kr">end</span>
+  <span class="kr">end</span><span class="p">,</span>
+<span class="p">})</span>
+</code></pre></div><p>A variável <code>opt</code> vai servir como uma função &ldquo;helper&rdquo;, checando qual o escopo de cada variável, e atribuindo o valor
+de acordo com o resultado dele. Então você poderá substituir o código anterior por:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="n">opt.termguicolors</span> <span class="o">=</span> <span class="kc">true</span>   <span class="c1">-- set termguicolors</span>
+<span class="n">opt.colorcolumn</span> <span class="o">=</span> <span class="mi">80</span>       <span class="c1">-- set colorcolumn=80</span>
+<span class="n">opt.expandtab</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set expandtab</span>
+<span class="n">opt.tabstop</span> <span class="o">=</span> <span class="mi">4</span>            <span class="c1">-- set tabstop=4</span>
+<span class="n">opt.autoindent</span> <span class="o">=</span> <span class="kc">true</span>      <span class="c1">-- set autoindent</span>
+<span class="n">opt.incsearch</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set incsearch</span>
+<span class="n">opt.hlsearch</span> <span class="o">=</span> <span class="kc">true</span>        <span class="c1">-- set hlsearch</span>
+</code></pre></div><p>O que resolve o problema de escopo das options.</p>
+<p>Continuando com a <strong>parte 2</strong>, temos uma declaração de uma variável global (escopo <code>g:</code>). Na API, podemos utilizar as
+seguintes funções:</p>
+<ul>
+<li><strong>vim.api.nvim_set_var</strong> e suas variações (<strong>vim.api.nvim_get_var</strong> e <strong>vim.api.nvim_del_var</strong>)</li>
+</ul>
+<p>Aqui também temos uma versão &ldquo;minimalista&rdquo; com seus respectivo <strong>meta-acessor</strong> (ver <strong>:h lua-vim-variables</strong> para mais
+detalhes):</p>
+<ul>
+<li><strong>vim.g</strong> - Também funciona como um getter/setter</li>
+</ul>
+<p>Temos então nosso código lua, com a parte 2:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="c1">-- parte 1</span>
+<span class="n">opt.termguicolors</span> <span class="o">=</span> <span class="kc">true</span>   <span class="c1">-- set termguicolors</span>
+<span class="n">opt.colorcolumn</span> <span class="o">=</span> <span class="mi">80</span>       <span class="c1">-- set colorcolumn=80</span>
+<span class="n">opt.expandtab</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set expandtab</span>
+<span class="n">opt.tabstop</span> <span class="o">=</span> <span class="mi">4</span>            <span class="c1">-- set tabstop=4</span>
+<span class="n">opt.autoindent</span> <span class="o">=</span> <span class="kc">true</span>      <span class="c1">-- set autoindent</span>
+<span class="n">opt.incsearch</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set incsearch</span>
+<span class="n">opt.hlsearch</span> <span class="o">=</span> <span class="kc">true</span>        <span class="c1">-- set hlsearch</span>
+
+<span class="c1">-- parte 2</span>
+<span class="n">vim.g</span><span class="p">.</span><span class="n">minha_config</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+ <span class="c1">-- o `meta-acessor` é uma table, então podemos atribuir valores usando também os colchetes</span>
+<span class="n">vim.g</span><span class="p">[</span><span class="s2">&#34;algumnamespace#teste#variavel&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+</code></pre></div><p>Para a <strong>parte 3</strong> temos os mappings e para isso temos 2 funções que podem ser utilizadas:</p>
+<ul>
+<li><strong>vim.api.nvim_set_keymap</strong>: mappings que serão atribuídos para todos os buffers</li>
+<li><strong>vim.api.nvim_buf_set_keymap</strong>: mappings que serão exclusivos de algum buffer em particular</li>
+</ul>
+<p><strong>vim.api.nvim_set_keymap</strong> tem os seguintes parâmetros:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">vim.api.nvim_set_keymap(modo, atalho, comando_a_ser_executado, opcoes)
+</code></pre></div><p>Onde:</p>
+<ul>
+<li><strong>modo</strong>: Opções mais usadas são: <strong>&ldquo;n&rdquo;</strong>, <strong>&ldquo;v&rdquo;</strong>, <strong>&ldquo;i&rdquo;</strong> sendo os mais utilizados respectivamente para os modos <strong>normal</strong>, <strong>visual</strong> e <strong>insert</strong></li>
+<li><strong>atalho</strong>: a combinação de teclas que chamará o <code>comando_a_ser_executado</code></li>
+<li><strong>comando_a_ser_executado</strong>: o comando que será executado quando o atalho for executado no modo específico</li>
+<li><strong>opcoes</strong>: uma table opcional de parâmetros booleanos. Os parâmetros dizem a respeito das variadas opções de mapping para cada
+estado, sendo alguma delas:
+<ul>
+<li><em>noremap</em></li>
+<li><em>silent</em></li>
+<li><em>expr</em></li>
+<li><em>nowait</em></li>
+</ul>
+</li>
+</ul>
+<p>Temos então, no nosso arquivo lua:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="c1">-- parte 1</span>
+<span class="n">opt.termguicolors</span> <span class="o">=</span> <span class="kc">true</span>   <span class="c1">-- set termguicolors</span>
+<span class="n">opt.colorcolumn</span> <span class="o">=</span> <span class="mi">80</span>       <span class="c1">-- set colorcolumn=80</span>
+<span class="n">opt.expandtab</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set expandtab</span>
+<span class="n">opt.tabstop</span> <span class="o">=</span> <span class="mi">4</span>            <span class="c1">-- set tabstop=4</span>
+<span class="n">opt.autoindent</span> <span class="o">=</span> <span class="kc">true</span>      <span class="c1">-- set autoindent</span>
+<span class="n">opt.incsearch</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set incsearch</span>
+<span class="n">opt.hlsearch</span> <span class="o">=</span> <span class="kc">true</span>        <span class="c1">-- set hlsearch</span>
+
+<span class="c1">-- parte 2</span>
+<span class="n">vim.g</span><span class="p">.</span><span class="n">minha_config</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+ <span class="c1">-- o `meta-acessor` é uma table, então podemos atribuir valores usando também os colchetes</span>
+<span class="n">vim.g</span><span class="p">[</span><span class="s2">&#34;algumnamespace#teste#variavel&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+
+<span class="c1">-- parte 3</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;,&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;Cmd&gt;:noh&lt;CR&gt;&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span> <span class="c1">-- nmap &lt;leader&gt;, &lt;Cmd&gt;:noh&lt;CR&gt;</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;h&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;Cmd&gt;split&lt;CR&gt;&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">noremap</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">-- nnoremap &lt;leader&gt;h &lt;Cmd&gt;split&lt;CR&gt;</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;gv&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">noremap</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">-- vnoremap &lt; &lt;gv</span>
+</code></pre></div><p>Já para a <strong>parte 4</strong>, vamos adicionar os autocmd e augroups. Como, até o momento, não existe uma API direta para criar
+os autocmds, vamos utilizar a função <code>vim.api.nvim_command</code> ou sua versão reduzida <code>vim.cmd</code>, que executa um código
+vimscript dentro do código lua.</p>
+<p>Temos então no nosso arquivo lua:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="c1">-- parte 1</span>
+<span class="n">opt.termguicolors</span> <span class="o">=</span> <span class="kc">true</span>   <span class="c1">-- set termguicolors</span>
+<span class="n">opt.colorcolumn</span> <span class="o">=</span> <span class="mi">80</span>       <span class="c1">-- set colorcolumn=80</span>
+<span class="n">opt.expandtab</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set expandtab</span>
+<span class="n">opt.tabstop</span> <span class="o">=</span> <span class="mi">4</span>            <span class="c1">-- set tabstop=4</span>
+<span class="n">opt.autoindent</span> <span class="o">=</span> <span class="kc">true</span>      <span class="c1">-- set autoindent</span>
+<span class="n">opt.incsearch</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set incsearch</span>
+<span class="n">opt.hlsearch</span> <span class="o">=</span> <span class="kc">true</span>        <span class="c1">-- set hlsearch</span>
+
+<span class="c1">-- parte 2</span>
+<span class="n">vim.g</span><span class="p">.</span><span class="n">minha_config</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+ <span class="c1">-- o `meta-acessor` é uma table, então podemos atribuir valores usando também os colchetes</span>
+<span class="n">vim.g</span><span class="p">[</span><span class="s2">&#34;algumnamespace#teste#variavel&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+
+<span class="c1">-- parte 3</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;,&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;Cmd&gt;:noh&lt;CR&gt;&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span> <span class="c1">-- nmap &lt;leader&gt;, &lt;Cmd&gt;:noh&lt;CR&gt;</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;h&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;Cmd&gt;split&lt;CR&gt;&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">noremap</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">-- nnoremap &lt;leader&gt;h &lt;Cmd&gt;split&lt;CR&gt;</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;gv&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">noremap</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">-- vnoremap &lt; &lt;gv</span>
+
+<span class="c1">-- parte 4</span>
+<span class="n">vim.cmd</span><span class="p">(</span><span class="s2">&#34;autocmd BufEnter * echo &#39;hello nvim&#39;&#34;</span><span class="p">)</span>
+</code></pre></div><p>Para a última parte, temos uma função vimscript que poderá ser portada utilizando a função <code>vim.api.nvim_exec</code>, que
+avalia um código vimscript contendo várias linhas. A assinatura da função é da seguinte forma:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">vim.api.nvim_exec(bloco_de_codigo, retorno)
+</code></pre></div><p>Onde:</p>
+<ul>
+<li><strong>bloco_de_codigo</strong>: A string multiline ou não do bloco de código vimscript que será executado</li>
+<li><strong>retorno</strong>: <em>true</em> caso deseje retornar o resultado string da execução do bloco, <em>false</em> para retornar uma
+string vazia</li>
+</ul>
+<p>Temos então a versão final da config lua:</p>
+<div class="highlight"><pre class="chroma"><code class="language-lua" data-lang="lua"><span class="kd">local</span> <span class="n">opts_info</span> <span class="o">=</span> <span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_get_all_options_info</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">setmetatable</span><span class="p">({},</span> <span class="p">{</span>
+  <span class="n">__index</span> <span class="o">=</span> <span class="n">vim.o</span><span class="p">,</span>
+  <span class="n">__newindex</span> <span class="o">=</span> <span class="kr">function</span><span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="n">vim.o</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="kd">local</span> <span class="n">scope</span> <span class="o">=</span> <span class="n">opts_info</span><span class="p">[</span><span class="n">key</span><span class="p">].</span><span class="n">scope</span>
+    <span class="kr">if</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&#34;win&#34;</span> <span class="kr">then</span>
+      <span class="n">vim.wo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="kr">elseif</span> <span class="n">scope</span> <span class="o">==</span> <span class="s2">&#34;buf&#34;</span> <span class="kr">then</span>
+      <span class="n">vim.bo</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="kr">end</span>
+  <span class="kr">end</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="c1">-- parte 1</span>
+<span class="n">opt.termguicolors</span> <span class="o">=</span> <span class="kc">true</span>   <span class="c1">-- set termguicolors</span>
+<span class="n">opt.colorcolumn</span> <span class="o">=</span> <span class="mi">80</span>       <span class="c1">-- set colorcolumn=80</span>
+<span class="n">opt.expandtab</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set expandtab</span>
+<span class="n">opt.tabstop</span> <span class="o">=</span> <span class="mi">4</span>            <span class="c1">-- set tabstop=4</span>
+<span class="n">opt.autoindent</span> <span class="o">=</span> <span class="kc">true</span>      <span class="c1">-- set autoindent</span>
+<span class="n">opt.incsearch</span> <span class="o">=</span> <span class="kc">true</span>       <span class="c1">-- set incsearch</span>
+<span class="n">opt.hlsearch</span> <span class="o">=</span> <span class="kc">true</span>        <span class="c1">-- set hlsearch</span>
+
+<span class="c1">-- parte 2</span>
+<span class="n">vim.g</span><span class="p">.</span><span class="n">minha_config</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+ <span class="c1">-- o `meta-acessor` é uma table, então podemos atribuir valores usando também os colchetes</span>
+<span class="n">vim.g</span><span class="p">[</span><span class="s2">&#34;algumnamespace#teste#variavel&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&#34;valor&#34;</span>
+
+<span class="c1">-- parte 3</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;,&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;Cmd&gt;:noh&lt;CR&gt;&#34;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span> <span class="c1">-- nmap &lt;leader&gt;, &lt;Cmd&gt;:noh&lt;CR&gt;</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;n&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;leader&gt;h&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;Cmd&gt;split&lt;CR&gt;&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">noremap</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">-- nnoremap &lt;leader&gt;h &lt;Cmd&gt;split&lt;CR&gt;</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_set_keymap</span><span class="p">(</span><span class="s2">&#34;v&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;&#34;</span><span class="p">,</span> <span class="s2">&#34;&lt;gv&#34;</span><span class="p">,</span> <span class="p">{</span><span class="n">noremap</span> <span class="o">=</span> <span class="kc">true</span><span class="p">})</span> <span class="c1">-- vnoremap &lt; &lt;gv</span>
+
+<span class="c1">-- parte 4</span>
+<span class="n">vim.cmd</span><span class="p">(</span><span class="s2">&#34;autocmd BufEnter * echo &#39;hello nvim&#39;&#34;</span><span class="p">)</span>
+
+<span class="c1">-- parte 5</span>
+<span class="n">vim.api</span><span class="p">.</span><span class="n">nvim_exec</span><span class="p">(</span><span class="s">[[
+</span><span class="s">function! SayHello()
+</span><span class="s">  echohl WarningMsg
+</span><span class="s">  echo &#34;Hello World&#34;
+</span><span class="s">  echohl
+</span><span class="s">endfunction
+</span><span class="s">]]</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+</code></pre></div><h2 id="limitações-da-lua-api">Limitações da Lua API</h2>
+<p>Até o momento deste post, algumas limitações ainda são presentes, dentre elas:</p>
+<ul>
+<li>API de criação de <em>commands</em> customizados: <a href="https://github.com/neovim/neovim/pull/11613">PR #11613</a></li>
+<li>API de criação de <em>autocmds</em> e <em>augroups</em>: <a href="https://github.com/neovim/neovim/pull/12378">PR #12378</a></li>
+<li>API de criação de <em>options</em>: <a href="https://github.com/neovim/neovim/pull/13479">PR #13479</a></li>
+</ul>
+<h2 id="conclusão">Conclusão</h2>
+<p>Mostramos que, apesar de algumas limitações, portar uma configuração em vimscript para Lua está cada dia mais fácil com a API vigente.
+Até a criação desde post a versão 0.5 do Neovim ainda não foi lançada, então é bom lembrar que muita dessas APIs só irão funcionar dentro essa versão.</p>
+<p>Para um exemplo de configuração mais extensa usando mais elementos da API Lua, visite a <a href="https://github.com/ellisonleao/dotfiles/tree/main/configs/.config/nvim">minha configuração do neovim</a></p>
+<p>Lembrando que faço lives na <a href="https://twitch.tv/npxbr">Twitch</a>! Caso deseje ver esse tipo de conteúdo ao vivo, não deixe
+de me seguir por lá e também acompanhar meu <a href="https://twitter.com/ellisonleao">Twitter</a></p>
+<h2 id="links-úteis">Links Úteis</h2>
+<ul>
+<li><a href="https://github.com/npxbr">Github</a></li>
+<li><a href="https://t.me/vimbr">VimBR no telegram</a></li>
+<li><a href="https://neovim.io/doc/user/lua.html">Documentação Oficial Neovim e Lua</a></li>
+</ul>
+<h2 id="para-ouvir">Para ouvir</h2>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/Rv_a6rlRjZk" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+
+  </div>
+  
+  
+  
+  
+  
+    
+  
+  
+  
+  <div class="tags">
+    <div class="taxosfloating_left">
+      <p>Tags</p>
+    </div>
+    <div class="termsfloating_right">
+      <p>
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/dotfiles/"> dotfiles </a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/lua/"> lua </a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/neovim/"> neovim </a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <a href="https://ellisonleao.github.io/tags/plugin/"> plugin </a>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+      </p>
+    </div>
+    <div class="clearit"></div>
+    
+    
+    
+    
+    
+  </div></div>
+
+  </main><div class="footer wrapper">
+	<nav class="nav">
+		<div class="footertext"></div>
+	</nav>
+</div>
+
+<script data-goatcounter="https://ellisonleao.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>

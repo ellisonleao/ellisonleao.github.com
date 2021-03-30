@@ -176,7 +176,7 @@ Para ver a versão completa do plugin, com mais customizações, [clique aqui e 
 ## Links Úteis
 
 - [Twitch](https://twitch.tv/npxbr)
-- [Twitter NpX](https://twitter.com/npxbr)
+- [Twitter NpX](https://twitter.com/ellisonleao)
 - [Github](https://github.com/npxbr)
 - [VimBR no telegram](https://t.me/vimbr)
 - [Documentação Oficial Neovim e Lua](https://neovim.io/doc/user/lua.html)

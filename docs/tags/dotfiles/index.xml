@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>dotfiles on Ellison Leão</title>
+		<link>https://ellisonleao.github.io/tags/dotfiles/</link>
+		<description>Recent content in dotfiles on ellisonleao.github.io</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>pt-br</language>
+		<lastBuildDate>Tue, 30 Mar 2021 00:00:00 +0000</lastBuildDate>
+		
+		<atom:link href="https://ellisonleao.github.io/tags/dotfiles/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Criando plugins Lua para Neovim - Parte 3</title>
+			<link>https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-3/</link>
+			<pubDate>Tue, 30 Mar 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://ellisonleao.github.io/posts/criando-plugins-para-neovim-parte-3/</guid>
+			<description>
+				
+				Migrando do init.vim para o init.lua
+				
+			</description>
+		</item>
+		
+	</channel>
+</rss>

@@ -1,5 +1,166 @@
-<!doctype html><html lang=pt-br><head><meta name=generator content="Hugo 0.77.0-DEV"><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=google-site-verification content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4"><meta property="og:title" content="Ellison Leão"><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content="https://ellisonleao.github.io/"><meta property="og:updated_time" content="2020-11-29T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Ellison Leão"><meta name=twitter:description content><link rel=alternate type=application/rss+xml href=https://ellisonleao.github.io/index.xml title="Ellison Leão"><link rel=stylesheet type=text/css media=screen href=https://ellisonleao.github.io/css/normalize.css><link rel=stylesheet type=text/css media=screen href=https://ellisonleao.github.io/css/main.css><link rel=stylesheet type=text/css media=screen href=https://ellisonleao.github.io/css/all.css><script async src=https://arc.io/widget.js#8fssWjDK></script><link rel=stylesheet type=text/css media=screen href=https://ellisonleao.github.io/css/overrides.css><title>Ellison Leão</title></head><body><header><div id=titletext><h1 id=title><a href=https://ellisonleao.github.io/>Ellison Leão</a></h1></div><div id=title-description><p id=subtitle>Polyrhythm programming</p><div id=social><nav><ul><li><a href=https://github.com/ellisonleao/><i title=Github class="icons fab fa-github"></i></a></li><li><a href=https://twitch.tv/npxbr><i title=Twitch class="icons fab fa-twitch"></i></a></li><li><a href=https://twitter.com/ellisonleao><i title=Twitter class="icons fab fa-twitter"></i></a></li><li><a href=https://linkedin.com/in/ellisonleao><i title=Linkedin class="icons fab fa-linkedin"></i></a></li><li><a href=/index.xml><i title=RSS class="icons fas fa-rss"></i></a></li></ul></nav></div></div><div id=mainmenu><nav><ul><li><a href=/about>Sobre mim</a></li><li><a href=/posts>Blog</a></li><li><a href=/tags>Tags</a></li></ul></nav></div></header><main><div class=recent-posts><div class=posts><div class=post><div class=post-header><div class=meta><div class=date><span class=day>29</span>
-<span class=rest>Nov 2020</span></div></div><div class=matter><h3 class="title small"><a href=/posts/criando-plugins-para-neovim-parte-2/>Criando plugins Lua para Neovim - Parte 2</a></h3><span class=description>Um plugin para o mundo real</span></div></div></div><div class=post><div class=post-header><div class=meta><div class=date><span class=day>02</span>
-<span class=rest>Out 2020</span></div></div><div class=matter><h3 class="title small"><a href=/posts/criando-plugins-para-neovim-parte-1/>Criando plugins Lua para Neovim - Parte 1</a></h3><span class=description>Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim</span></div></div></div><div class=post><div class=post-header><div class=meta><div class=date><span class=day>26</span>
-<span class=rest>Mar 2020</span></div></div><div class=matter><h3 class="title small"><a href=/posts/a-longa-derrota/>Tolkien e a longa derrota</a></h3><span class=description>..e juntos, através das eras do mundo, lutamos pela longa derrota</span></div></div></div><div class=post><div class=post-header><div class=meta><div class=date><span class=day>16</span>
-<span class=rest>Fev 2012</span></div></div><div class=matter><h3 class="title small"><a href=/posts/nao-eram-apenas-copos-rosas/>Não eram apenas copos rosas</a></h3><span class=description>Um relato sobre minha primeira Global Game Jam</span></div></div></div></div></div></main><div class="footer wrapper"><nav class=nav><div class=footertext></div></nav></div><script data-goatcounter=https://ellisonleao.goatcounter.com/count async src=//gc.zgo.at/count.js></script></body></html>
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+  
+  <meta name="generator" content="Hugo 0.82.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4" /><meta property="og:title" content="Ellison Leão" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://ellisonleao.github.io/" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ellison Leão"/>
+<meta name="twitter:description" content=""/>
+<link rel="alternate" type="application/rss+xml" href="https://ellisonleao.github.io/index.xml" title="Ellison Leão">
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/normalize.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/main.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/all.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/syntax.css" />
+  <script async src="https://arc.io/widget.js#8fssWjDK"></script>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="https://ellisonleao.github.io/css/overrides.css" /><title>Ellison Leão </title></head>
+<body><header>
+    
+    <div id="titletext"><h1 id="title"><a href="https://ellisonleao.github.io/">Ellison Leão</a></h1></div>
+    <div id="title-description"><p id="subtitle">Polyrhythm programming</p><div id=social>
+            <nav>
+                <ul><li><a href="https://github.com/ellisonleao/"><i title="Github" class="icons fab fa-github"></i></a></li><li><a href="https://twitch.tv/npxbr"><i title="Twitch" class="icons fab fa-twitch"></i></a></li><li><a href="https://twitter.com/ellisonleao"><i title="Twitter" class="icons fab fa-twitter"></i></a></li><li><a href="https://linkedin.com/in/ellisonleao"><i title="Linkedin" class="icons fab fa-linkedin"></i></a></li><li><a href="/index.xml"><i title="RSS" class="icons fas fa-rss"></i></a></li></ul>
+            </nav>
+        </div>
+    </div>
+    
+    <div id="mainmenu">
+        <nav>
+            <ul>
+                
+                <li><a href="/about">Sobre mim</a></li>
+                
+                <li><a href="/posts">Blog</a></li>
+                
+                <li><a href="/tags">Tags</a></li>
+                
+            </ul>
+        </nav>
+    </div>
+    
+</header>
+<main>
+<div class="recent-posts">
+	<div class="posts">
+	
+	
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">30</span>
+						<span class="rest">Mar 2021</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/posts/criando-plugins-para-neovim-parte-3/">Criando plugins Lua para Neovim - Parte 3</a></h3>
+					<span class="description">
+					
+					Migrando do init.vim para o init.lua
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">29</span>
+						<span class="rest">Nov 2020</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/posts/criando-plugins-para-neovim-parte-2/">Criando plugins Lua para Neovim - Parte 2</a></h3>
+					<span class="description">
+					
+					Um plugin para o mundo real
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">02</span>
+						<span class="rest">Out 2020</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/posts/criando-plugins-para-neovim-parte-1/">Criando plugins Lua para Neovim - Parte 1</a></h3>
+					<span class="description">
+					
+					Uma série mostrando um passo a passo na criação de plugins Lua para o Neovim
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">26</span>
+						<span class="rest">Mar 2020</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/posts/a-longa-derrota/">Tolkien e a longa derrota</a></h3>
+					<span class="description">
+					
+					..e juntos, através das eras do mundo, lutamos pela longa derrota
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+		<div class="post">
+			<div class="post-header">
+				<div class="meta">
+					<div class="date">
+						<span class="day">16</span>
+						<span class="rest">Fev 2012</span>
+					</div>
+				</div>
+				<div class="matter">
+					<h3 class="title small"><a href="/posts/nao-eram-apenas-copos-rosas/">Não eram apenas copos rosas</a></h3>
+					<span class="description">
+					
+					Um relato sobre minha primeira Global Game Jam
+					
+					</span>
+				</div>
+			</div>
+		</div>
+	
+	
+
+
+	</div>
+</div>
+
+
+  </main><div class="footer wrapper">
+	<nav class="nav">
+		<div class="footertext"></div>
+	</nav>
+</div>
+
+<script data-goatcounter="https://ellisonleao.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+</body>
+</html>
