@@ -12,13 +12,12 @@ pygmentsUseClasses            = true
 
 [params]
     googleSiteVerification = "RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4"
-    # avatar = "/img/logo-site.png"
+    avatar = "/img/npx.png"
     contentTypeName = "posts"
     goatCounter = "ellisonleao"
     listAuthor = true
     subtitle = "Polyrhythm programming"
     arc = "8fssWjDK"
-    customCSS = "overrides.css"
 
     [[params.social]]
         name = "Github"

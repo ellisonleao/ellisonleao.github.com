@@ -1,7 +1,6 @@
 +++
 title = "Tolkien e a longa derrota"
 date = "2020-03-26"
-author = "Ellison Leão"
 description = "..e juntos, através das eras do mundo, lutamos pela longa derrota"
 tags = ["reflexao", "tolkien"]
 +++
