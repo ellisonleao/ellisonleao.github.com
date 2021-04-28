@@ -1,36 +1,5 @@
-@font-face {
-  font-family: 'Roboto Regular';
-  font-display: auto;
-  font-style:  normal;
-  font-weight: 400;
-  src: local('Roboto Regular'), url('../webfonts/Roboto-Regular.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Roboto Medium';
-  font-display: auto;
-  font-style:  normal;
-  font-weight: 500;
-  src: local('Roboto Medium'), url('../webfonts/Roboto-Medium.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Roboto Bold';
-  font-display: auto;
-  font-style:  normal;
-  font-weight: 600;
-  src: local('Roboto Bold'), url('../webfonts/Roboto-Bold.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Roboto Slab Regular';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Slab Regular'), url('../webfonts/RobotoSlab-Regular.woff') format('woff');
-}
-
 body {
-  font-family: "Roboto Regular", serif;
+  font-family: "Playfair Display", Georgia, serif;
   font-weight: 400;
   font-size: 18px;
   color: #333;
@@ -54,7 +23,6 @@ header nav li {
 }
 
 footer {
-  font-family: "Roboto Slab Regular", serif;
   text-align: right;
   font-size: 0.75em;
   color: #999;
@@ -76,7 +44,7 @@ html,button,input,select,textarea {
 }
 
 b, strong {
-  font-family: "Roboto Bold";
+  font-weight: "bold";
 }
 
 a {
@@ -298,7 +266,6 @@ table th {
 }
 
 .post-header .meta .date .day {
-    font-family: "Roboto Slab Regular", serif;
     font-weight: 700;
     line-height: 0.45em;
     font-size: 3em;
@@ -310,18 +277,15 @@ table th {
 .post-header .meta .date .rest {
     display: block;
     font-size: 0.80em;
-    font-family: "Roboto Slab Regular", serif;
 }
 
 .post-header h1.title {
     margin: -10px 0 0 0;
-    font-family: "Roboto Slab Regular", serif;
     font-weight: bold;
 }
 
 .post .title.small {
     margin: 0 0 10px 0;
-    font-family: "Roboto Slab Regular", serif;
 }
 
 .post .post-header {

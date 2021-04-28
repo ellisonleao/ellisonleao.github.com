@@ -1,8 +1,6 @@
 +++
 title = "Não eram apenas copos rosas"
 date = "2012-02-16"
-author = "Ellison Leão"
-authorTwitter = "ellisonleao" #do not include @
 cover = "img/ouroboros.jpg"
 tags = ["gamedev", "fuschia"]
 keywords = ["gamedev", "melonjs"]
@@ -15,7 +13,7 @@ Curitiba foi, esse ano, a segunda maior sede do mundo, com 245 inscritos e só p
 
 Uma expectativa pairava o pessoal que estava lá sedendo pela vontade de criar coisas novas e divertidas. Após o keynote de Will Wright, o tema surgira e todos que estavam lá ficaram abismados com um tema tão diferente. Pela primeira vez, o tema da Global Game Jam não era uma palavra e sim uma imagem, Ouroboros.
 
-Infinito, ciclo da vida, morte e ressureição. Esses foram as palavras que palpitavam na grande sala onde os grupos se reuniam para pensar como seria fazer um jogo com estes temas. Era a hora do brainstorm inicial. Nosso grupo ficou cerca de 2 horas jogando idéias num papel, misturando vários elementos e mecânicas, até que, chegamos num  consenso.
+Infinito, ciclo da vida, morte e ressureição. Esses foram as palavras que palpitavam na grande sala onde os grupos se reuniam para pensar como seria fazer um jogo com estes temas. Era a hora do brainstorm inicial. Nosso grupo ficou cerca de 2 horas jogando idéias num papel, misturando vários elementos e mecânicas, até que, chegamos num consenso.
 
 Contaríamos a saga de um alquimista em busca da vida eterna. Na história, o alquimista Frangoi consegue transitar em 2 mundos paralelos (real e espiritual) e tem de percorrer um longo percurso, resolvendo enigmas e combatendo inimigos pelo caminho. Idéias concretizadas, fomos para o planejamento de o que daria pra fazer nessas 48 horas. Uns achavam que não sairíamos de um concept, outros já achavam que dava pra completar uma fase inteira. E ficou na base do “vamo ver no que vai dar”. Começando as atividades, resolvemos utilizar como ferramentas, o excelente framework [MelonJS](https://melonjs.org), já que tínhamos resolvido fazer nosso jogo em HTML5.
 
@@ -29,15 +27,12 @@ Já era noite e alguns bugs começaram a aparecer. Víamos que a madrugada seria
 
 O **Fuscshia Team** (Nome dado de última hora pra equipe, devido aos nossos copos descartáveis rosas usados jam) nasceu nesse evento e espera dar continuação a esse jogo que até mesmo com um protótipo já conseguiu ficar entre os 3 jogos mais votados da GGJ Curitiba e ser citado no blog e galeria oficial do framework MelonJS], fatos estes que nos deixam cada vez mais motivados a finalizar uma versão jogável do protótipo.
 
-
 Entrevista com desenvolvedores:
 
 {{< youtube nzl6Bmtfjhk >}}
 
-
 Gameplay:
 
 {{< youtube DXE6YxewXaM >}}
-
 
 Este texto foi repostado em homenagem ao nosso querido amigo [Pedro Bueno](https://www.instagram.com/ph_bueno/), que infelizmente nos deixou em 2020. Sentiremos sua falta, irmão.
