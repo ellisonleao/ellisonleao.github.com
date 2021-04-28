@@ -1,5 +1,5 @@
 body {
-  font-family: "Playfair Display", Georgia, serif;
+  font-family: 'Inconsolata', monospace;
   font-weight: 400;
   font-size: 18px;
   color: #333;
@@ -48,6 +48,7 @@ b, strong {
 }
 
 a {
+  font-family: "Playfair Display", Georgia, serif;
   color: #2f9d16;
   text-decoration: none;
   word-break: break-word;
@@ -280,6 +281,7 @@ table th {
 }
 
 .post-header h1.title {
+    font-family: "Playfair Display", Georgia, serif;
     margin: -10px 0 0 0;
     font-weight: bold;
 }
